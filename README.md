@@ -1,4 +1,4 @@
-# FreeTypeGX
+# FreeTypeGX for GRRLIB
 FreeTypeGX is a wrapper class for libFreeType which renders a compiled FreeType parseable font into a GX texture for Wii homebrew development.
 
 
@@ -8,13 +8,14 @@ Note: As of version 0.2.1 FreeTypeGX has forked into two disparate projects and 
 
 This library was developed in-full by Armin Tamzarian with the support of developers in #wiidev on EFnet.
 
-Full Doxygen API documentation can be found at https://armintamzarian.github.io/freetypegx for assistance with program integration.
+Full Doxygen API documentation for the original version of FreeTypeGX can be found at https://armintamzarian.github.io/freetypegx for assistance with program integration. Some syntax is different, though.
 
 ## Installation (Source Code)
 
-1. Ensure that you have the FreeType Wii library installed in your development environment with the library added to your Makefile where appropriate.
-2. Ensure that you have the Metaphrasis library installed in your development environment with the library added to your Makefile where appropriate.
-3. Extract the FreeTypeGX archive.
+1. Ensure that you have [GRRLIB](https://github.com/GRRLIB/GRRLIB) installed in your development environment with the library added to your Makefile where appropriate.
+2. Ensure that you have the FreeType Wii library installed in your development environment with the library added to your Makefile where appropriate.
+3. Ensure that you have the [Metaphrasis](https://github.com/ArminTamzarian/metaphrasis) library installed in your development environment with the library added to your Makefile where appropriate.
+4. Extract the FreeTypeGX archive.
 Copy the contents of the src directory into your project's development path.
 Include the FreeTypeGX header file in your code using syntax such as the following:
 
@@ -24,14 +25,15 @@ include "FreeTypeGX.h"
 
 ## Installation (Library)
 
-1. Ensure that you have the FreeType Wii library installed in your development environment with the library added to your Makefile where appropriate.
-2. Ensure that you have the Metaphrasis library installed in your development environment with the library added to your Makefile where appropriate.
-3. Extract the FreeTypeGX archive.
-4. Copy the contents of the lib directory into your devKitPro/libogc directory.
-5. Include the FreeTypeGX header file in your code using syntax such as the following:
+1. Ensure that you have [GRRLIB](https://github.com/GRRLIB/GRRLIB) installed in your development environment with the library added to your Makefile where appropriate.
+2. Ensure that you have the FreeType Wii library installed in your development environment with the library added to your Makefile where appropriate.
+3. Ensure that you have the [Metaphrasis](https://github.com/ArminTamzarian/metaphrasis) library installed in your development environment with the library added to your Makefile where appropriate.
+4. Extract the FreeTypeGX archive.
+5. Copy the contents of the lib directory into your devKitPro/libogc directory.
+6. Include the FreeTypeGX header file in your code using syntax such as the following:
 
 ```c++
-include "FreeTypeGX.h"
+include <FreeTypeGX.h>
 ```
 
 ## FreeTypeGX Prerequisites
@@ -63,12 +65,6 @@ Alternately you can specify a texture format to which you would like to render t
 FreeTypeGX *freeTypeGX = new FreeTypeGX(GX_TF_RGB565);
 ```
 
-Furthermore, you can also specify a positional format as defined in your graphics subsystem initialization. Note that the default value for this parameter is GX_POS_XYZ.
-
-```c++
-FreeTypeGX *freeTypeGX = new FreeTypeGX(GX_TF_RGB565, GX_POS_XY);
-```
-
 Currently supported textures are:
 * `GX_TF_I4`
 * `GX_TF_I8`
@@ -77,10 +73,6 @@ Currently supported textures are:
 * `GX_TF_RGB565`
 * `GX_TF_RGB5A3`
 * `GX_TF_RGBA8`
-
-Currently supported position formats are:
-* `GX_POS_XY`
-* `GX_POS_XYZ`
 
 Using the allocated FreeTypeGX instance object call the loadFont function to load the font from the compiled buffer and specify the desired point size:
 
@@ -99,16 +91,16 @@ Using the allocated FreeTypeGX instance object call the drawText function to pri
 freeTypeGX->drawText(10, 25, _TEXT("FreeTypeGX Rocks!"));
 ```
 
-Alternately you can specify a GXColor object you would like to apply to the printed characters:
+Alternately you can specify a color you would like to apply to the printed characters:
 
 ```c++
-freeTypeGX->drawText(10, 25, _TEXT("FreeTypeGX Rocks!"), (GXColor){0xff, 0xee, 0xaa, 0xff});
+freeTypeGX->drawText(10, 25, _TEXT("FreeTypeGX Rocks!"), 0xffeeaaff);
 ```
 
 Furthermore you can also specify a group of styling parameters which will modify the positioning or style of the text:
 
 ```c++
-freeTypeGX->drawText(10, 25, _TEXT("FreeTypeGX Rocks!"), (GXColor){0xff, 0xee, 0xaa, 0xff}, FTGX_JUSTIFY_CENTER | FTGX_ALIGN_BOTTOM | FTGX_STYLE_UNDERLINE);
+freeTypeGX->drawText(10, 25, _TEXT("FreeTypeGX Rocks!"), 0xffeeaaff, FTGX_JUSTIFY_CENTER | FTGX_ALIGN_BOTTOM | FTGX_STYLE_UNDERLINE);
 ```
 
 Currently style parameters are:
